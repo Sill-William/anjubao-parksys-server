@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJB Park Booking System</title>
+  {{> head}}
+</head>
+<body>
+  <div class="h1">
+    <h1 class="mv0 mh2 fw6">车辆管理</h1>
+  </div>
+  <div class="mt4">
+    <table class="layui-hide" id="car-table" lay-filter="car-table"></table>
+  </div>
+  {{> table_line_operations}}
+  {{> table_toolbar}}
+  {{> script}}
+  <script src="/js/module/car.js"></script>
+</body>
+</html>

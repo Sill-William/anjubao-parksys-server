@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJB Park Booking System</title>
+  {{> head}}
+</head>
+<body>
+  <div class="h-auto">
+    <h1 class="mv0 mh2 fw6">停车场收费标准管理</h1>
+  </div>
+  <div class="layui-panel mt2 mh2 pa1">
+    停车场收费标准以时变化，你可以编辑一天24小时中每个时间段内的收费标准。车辆收费以离场时设置收费标准为基准。未设置标准的时间段内的车辆将不计费。
+  </div>
+  <div class="layui-hide" id="park-id">
+    {{ parkId }}
+  </div>
+  <div class="mt2">
+    <table class="layui-hide" id="park-fees-table" lay-filter="park-fees-table"></table>
+  </div>
+  {{> table_line_operations}}
+  {{> table_toolbar}}
+  {{> script}}
+  <script src="/js/module/park-fees.js"></script>
+</body>
+</html>

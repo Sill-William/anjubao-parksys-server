@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{> head}}
+    <title>AJB Park Booking System</title>
+    <style type="text/css">
+        body {
+            font-family: 'San Francisco', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="vw-100 vh-100 flex items-center justify-center bg-white">
+        <div class="tc w-50-ns w-25-l w-75 w5 h-auto pa3 pb0" style="background: #f7f7f7;">
+            <h3 class="pb3">安居宝停车预定系统管理系统</h3>
+            <div>
+                {{#if (eq type 'in')}}
+                <form class="layui-form" method="post">
+                    <div class="layui-form-item">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                <i class="layui-icon layui-icon-username"></i>
+                            </div>
+                            <input type="text" name="name" value="" lay-verify="required" placeholder="用户名"
+                                lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                <i class="layui-icon layui-icon-password"></i>
+                            </div>
+                            <input type="password" name="password" value="" lay-verify="required" placeholder="密   码"
+                                lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="submit">登录</button>
+                    </div>
+                </form>
+                {{!else}}
+                {{!现版本服务台不支持注册}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{> script}}
+    <script src="/js/md5.min.js"></script>
+    <script src="/js/module/auth.js"></script>
+</body>
+
+</html>
