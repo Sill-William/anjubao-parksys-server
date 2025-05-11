@@ -34,13 +34,15 @@ export class OrderController {
       }
     }
     let orders = []
-    if (user.role.indexOf('admin') === -1) {
-      orderQueryDto.user = user.id || user.sub
-      orders = await this.orderService.getOrders(orderQueryDto)
-    } else {
+    if (user.role === 'parkadmin') {
       if (!!user.plugin) {
         orderQueryDto.park = user.plugin
       } 
+      orders = await this.orderService.getOrders(orderQueryDto)
+    } else if (user.role === 'useradmin') {
+      orders = await this.orderService.getOrders(orderQueryDto)
+    } else {
+      orderQueryDto.user = user.id || user.sub
       orders = await this.orderService.getOrders(orderQueryDto)
     }
     return {

@@ -30,6 +30,15 @@ let nullDateFormatter = (field) => `
 {{# } }}
 </div>
 `
+let nullCostFormat = (field) => `
+<div>
+{{# if(d.${field} === null) { }}
+  -
+{{# } else {  }}
+  {{= d.${field} }}
+{{# } }}
+</div>
+`
 let nullMsgFormatter = (field) => `
 <div>
 {{# if(d.${field} === null) { }}
@@ -99,7 +108,7 @@ layui.use(['table'], function () {
       {field: 'order_outAt', title: '出场时间', width: 150, templet: nullDateFormatter('order_outAt')},
       {field: 'order_paiedAt', title: '订单支付时间', width: 150, templet: nullDateFormatter('order_paiedAt')},
       {field: 'order_endAt', title: '订单结束时间', width: 150, templet: nullDateFormatter('order_endAt')},
-      {field: 'order_cost', title: '订单支付金额', width: 150, templet: nullDateFormatter('order_cost')},
+      {field: 'order_cost', title: '订单支付金额', width: 150, templet: nullCostFormat('order_cost') },
       {field: 'order_status', title: '状态', templet: statusFormater},
       // {fixed: 'right', title:'操作', templet: '#line-operations'}
     ]],
