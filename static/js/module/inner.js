@@ -1,36 +1,80 @@
 let $ = layui.$
 let util = layui.util
 let layer = layui.layer
+let element = layui.element
+
+let tabMap = new Map()
 
 util.event('lay-header-event', {
-    menuLeft: function (t) {
-			let b = $('#leftCollapseBtn')
-			if (b.hasClass('layui-icon-spread-left')) {
-				menuLeftCollapse()
-			} else {
-				menuLeftSpread()
-			}
+	menuLeft: function (t) {
+		let b = $('#leftCollapseBtn')
+		if (b.hasClass('layui-icon-spread-left')) {
+			menuLeftCollapse()
+		} else {
+			menuLeftSpread()
+		}
 
-			function menuLeftCollapse() {
-				b.removeClass('layui-icon-spread-left').addClass('layui-icon-shrink-right')
-				$('.layui-logo').animate({width: '0'})
-				$('.layui-side').animate({width: '0'})
-				$('.layui-layout-left').animate({left: '0'})
-				$('.layui-body').animate({left: '0'})
-				$('.layui-footer').animate({left: '0'})
-				$('.layui-logo').addClass('layui-hide')
-			}
+		function menuLeftCollapse() {
+			b.removeClass('layui-icon-spread-left').addClass('layui-icon-shrink-right')
+			$('.layui-logo').animate({width: '0'})
+			$('.layui-side').animate({width: '0'})
+			$('.layui-layout-left').animate({left: '0'})
+			$('.layui-body').animate({left: '0'})
+			$('.layui-footer').animate({left: '0'})
+			$('.layui-logo').addClass('layui-hide')
+		}
 
-			function menuLeftSpread() {
-				b.removeClass('layui-icon-shrink-right').addClass('layui-icon-spread-left')
-				$('.layui-logo').animate({width: '200px'})
-				$('.layui-side').animate({width: '200px'})
-				$('.layui-layout-left').animate({left: '200px'})
-				$('.layui-body').animate({left: '200px'})
-				$('.layui-footer').animate({left: '200px'})
-				$('.layui-logo').removeClass('layui-hide')
+		function menuLeftSpread() {
+			b.removeClass('layui-icon-shrink-right').addClass('layui-icon-spread-left')
+			$('.layui-logo').animate({width: '200px'})
+			$('.layui-side').animate({width: '200px'})
+			$('.layui-layout-left').animate({left: '200px'})
+			$('.layui-body').animate({left: '200px'})
+			$('.layui-footer').animate({left: '200px'})
+			$('.layui-logo').removeClass('layui-hide')
+		}
+	}
+})
+
+// lay tab
+layui.use(function () {
+	util.on('lay-on', {
+		toTab: function (othis) {
+			// if (tabMap.has())
+			console.debug(othis)
+			let label = othis.attr('id')
+			if (tabMap.has(label)) {
+				element.tabChange('tab-handler', `tab-${label}`)
+				return
 			}
-    }
+			let forUrl = othis.attr('for')
+			element.tabAdd('tab-handler', {
+				title: othis.text(),
+				content: `<iframe class="w-100 h-100 bw0" title="submodule" id="ifr-${label}" src="${forUrl}"></iframe>`,
+				id: `tab-${label}`,
+				change: true,
+			})
+			tabMap.set(label, true)
+			$('.layui-tab-item').addClass('w-100 h-100 bw0')
+		},
+	})
+})
+
+element.on('tabDelete(tab-handler)', function (othis) {
+	console.debug(othis.id.replace('tab-', ''))
+	tabMap.delete(othis.id.replace('tab-', ''))
+})
+element.on('tab(tab-handler)', function (othis) {
+	let thisId = othis.id.replace('tab-', '')
+	let menuList = $('#menu-nav').children('li')
+	for (let i = 0; i < menuList.length; i += 1) {
+		let menu = $(menuList[i])
+		if ($(menu.children()[0]).attr('id') === othis.id.replace('tab-', '')) {
+			menu.addClass('layui-this')
+		} else {
+			menu.removeClass('layui-this')
+		}
+	}
 })
 
 let openProfile = function () {

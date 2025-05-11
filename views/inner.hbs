@@ -39,7 +39,7 @@
     </div>
     <div class="layui-side layui-bg-black layui-hide-xs">
       <div class="layui-side-scroll">
-        <ul class="layui-nav layui-nav-tree" lay-filter="t">
+        <ul class="layui-nav layui-nav-tree" lay-filter="t" id="menu-nav">
           {{#if (eq character 'dev')}}
           {{!开发角色}}
           <li class="layui-nav-item">
@@ -77,58 +77,66 @@
           {{/if}}
           {{#if (eq character 'rootadmin')}}
           <li class="layui-nav-item">
-            <a href="/user/admin" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">管理员管理</a>
+            <a class="flex items-center" lay-on="toTab" id="admin-manager"
+              style="display: flex; align-items: center;" for="/user/admin/">管理员管理</a>
           </li>
           <li class="layui-nav-item">
-            <a href="/role/" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">角色管理</a>
+            <a class="flex items-center" lay-on="toTab" id="role-manager"
+              style="display: flex; align-items: center;" for="/role/">角色管理</a>
           </li>
           {{/if}}
           {{#if (eq character 'useradmin')}}
           <li class="layui-nav-item">
-            <a href="/user/" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">用户管理</a>
+            <a class="flex items-center" lay-on="toTab" id="user-manager"
+              style="display: flex; align-items: center;" for="/user/">用户管理</a>
           </li>
           <li class="layui-nav-item">
-            <a href="/evaluate/" class="flex items-center"
-             style="display: flex; align-items: center;" target="win">评论管理</a>
+            <a class="flex items-center" lay-on="toTab" id="evaluate-manager"
+             style="display: flex; align-items: center;" for="/evaluate/">评论管理</a>
           </li>
           <li class="layui-nav-item">
-            <a href="/car/" class="flex items-center"
-             style="display: flex; align-items: center;" target="win">车辆管理</a>
+            <a class="flex items-center" lay-on="toTab" id="car-manager"
+             style="display: flex; align-items: center;" for="/car/">车辆管理</a>
           </li>
           <li class="layui-nav-item">
-            <a href="/order/" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">订单管理</a>
+            <a class="flex items-center" lay-on="toTab" id="order-manager"
+              style="display: flex; align-items: center;" for="/order/">订单管理</a>
           </li>
           {{/if}}
           {{#if (eq character 'parkadmin')}}
           <li class="layui-nav-item">
-            <a href="/order/" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">订单管理</a>
+            <a class="flex items-center" lay-on="toTab" id="order-manager"
+              style="display: flex; align-items: center;" for="/order/">订单管理</a>
           </li>
           <li class="layui-nav-item">
-            <a href="/park/" class="flex items-center"
-             style="display: flex; align-items: center;" target="win">停车场管理</a>
+            <a class="flex items-center" lay-on="toTab" id="park-manager"
+             style="display: flex; align-items: center;" for="/park/">停车场管理</a>
           </li>
           {{#if (ne user.plugin undefined)}}
           <li class="layui-nav-item">
-            <a href="/park-fee/" class="flex items-center"
-             style="display: flex; align-items: center;" target="win">停车场收费标准管理</a>
+            <a class="flex items-center" lay-on="toTab" id="parkfee-manager"
+             style="display: flex; align-items: center;" for="/park-fee/">停车场收费标准管理</a>
           </li>
           {{/if}}
           {{/if}}
           <li class="layui-nav-item">
-            <a href="/feedback/" class="flex items-center"
-              style="display: flex; align-items: center;" target="win">反馈查看</a>
+            <a class="flex items-center" lay-on="toTab" id="feedback-manager"
+              style="display: flex; align-items: center;" for="/feedback/">反馈查看</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="layui-body">
-      <iframe class="w-100 h-100 bw0" title="submodule" id="ifr" name="win">
-      </iframe>
+      <!-- <iframe class="w-100 h-100 bw0" title="submodule" id="ifr" name="win">
+      </iframe> ?-->
+      <div class="layui-tab w-100 h-100 bw0 flex flex-column" lay-filter="tab-handler" lay-allowclose="true">
+        <ul class="layui-tab-title">
+          <!-- <li class="layui-this" lay-id="tab-1">主页</li> ?-->
+        </ul>
+        <div class="layui-tab-content" style="flex: 1">
+          <!-- <div class="layui-tab-item layui-show">内容</div> ?-->
+        </div>
+      </div>
     </div>
     <div class="layui-footer layui-hide-xs flex justify-end-ns">
       Powered by AJB Inc. 06.02.2025 - 
