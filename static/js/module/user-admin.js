@@ -212,7 +212,7 @@ let edit = function (data) {
       layero.find('button[lay-on="reset-password"]').on('click', function () {
         $.ajax({
           url: `/user/`,
-          method: 'put',
+          method: 'PUT',
           data: {
             id: data.id,
             name: data.name,

@@ -103,6 +103,7 @@ export class AuthService {
         /^\/background.*/,
         /^\/auth.*/,
         /^\/feedback.*/,
+        /^\/order.*/,
       ],
       user: [
         /^\/park\/all.*/,

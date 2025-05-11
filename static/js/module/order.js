@@ -35,7 +35,7 @@ let nullCostFormat = (field) => `
 {{# if(d.${field} === null) { }}
   -
 {{# } else {  }}
-  {{= d.${field} }}
+  {{= parseFloat(d.${field}).toFixed(2) }}
 {{# } }}
 </div>
 `

@@ -109,7 +109,7 @@ layui.use(['table'], function () {
       {field: 'birthday', title: '出生日期', minWidth: 150, templet: `<div>{{= new Date(d.birthday).toLocaleString('zh-cn') }}</div>` },
       {field: 'created', title: '创建时间', minWidth: 150, templet: `<div>{{= new Date(d.created).toLocaleString('zh-cn') }}</div>` },
       {field: 'updated', title: '更新时间', sort: true, minWidth: 150, templet: `<div>{{= new Date(d.created).toLocaleString('zh-cn') }}</div>` },
-      {fixed: 'right', title:'操作', minWidth: 175, templet: '#line-operations'},
+      {fixed: 'right', title:'操作', minWidth: 200, width: 'auto', templet: '#line-operations'},
     ]],
     done: function () {
       console.log('table done')
@@ -124,6 +124,12 @@ layui.use(['table'], function () {
       }
       if ($('#table-toolbar-btn-unrestrict').length === 0) {
         $('<button class="layui-btn" id="table-toolbar-btn-unrestrict" lay-event="unrestrict">解封</button>').appendTo('#table-toolbar-container')        
+      }
+      // if ($('#table-toolbar-btn-reset-password').length === 0) {
+      //   $('<button class="layui-btn" id="table-toolbar-btn-reset-password" lay-event="reset-password">重置密码</button>').appendTo('#table-toolbar-container')
+      // }
+      if ($('.line-reset-password').length === 0) {
+        $('<button class="layui-btn layui-btn-xs" lay-event="reset-password">重置密码</button>').appendTo('.inline-operations')
       }
     }
   })
@@ -200,6 +206,40 @@ layui.use(['table'], function () {
     switch (o.event) {
       case 'info':
         info(data)
+        
+      case 'reset-password':
+        // layer.open({
+        //   type: 1, // page 层类型
+        //   area: ['400px', 'auto'],
+        //   title: `重置密码 - ${data.name}`, 
+        // })
+        layer.confirm(
+          '确认重置密码吗？',
+          {
+            btn: ['确认', '取消'],
+            title: '提示',
+            closeBtn: 0,
+            move: false,
+          },
+          () => {
+            $.ajax({
+              url: '/user/',
+              method: 'PUT',
+              data: {
+                id: data.id,
+                name: data.name,
+                password: md5('123456')
+              }
+            }).then((res) => {
+              if (res.attached) {
+                layer.closeAll()
+                layer.msg('重置成功') 
+              } else {
+                layer.msg('重置失败')
+              }
+            })
+          },
+        )
         break
       default:
         break 
